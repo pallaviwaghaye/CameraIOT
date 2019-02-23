@@ -70,10 +70,10 @@ public class CameraListActivity extends AppCompatActivity {
                 alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         //SharedPreferenceManager.clearPreferences();
-                        /*Intent intent = new Intent(CameraListActivity.this, LoginActivity.class);
+                        Intent intent = new Intent(CameraListActivity.this, LoginActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
-                        finish();*/
+                        finish();
                     }
                 });
                 alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -95,7 +95,7 @@ public class CameraListActivity extends AppCompatActivity {
                 if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
                     // gcm successfully registered
                     // now subscribe to `global` topic to receive app wide notifications
-                    FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
+                    //FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
 
                     displayFirebaseRegId();
 

@@ -8,9 +8,6 @@ import android.util.Log;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
-/**
- * Created by DELL on 2/22/2019.
- */
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
     private static final String TAG = MyFirebaseInstanceIDService.class.getSimpleName();
@@ -44,3 +41,4 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         editor.commit();
     }
 }
+
