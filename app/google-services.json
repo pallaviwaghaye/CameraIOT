@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "658379315223",
+    "firebase_url": "https://cameraiot-69119.firebaseio.com",
+    "project_id": "cameraiot-69119",
+    "storage_bucket": "cameraiot-69119.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658379315223:android:2f2ec2433b6bc064",
+        "android_client_info": {
+          "package_name": "com.webakruti.iot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "658379315223-otof241od1qbgk4qpesqqh4oq6imtsmb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqYgPHSjgWcZNPI01ZtntjCaTBdpRwxrQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
