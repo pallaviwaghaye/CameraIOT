@@ -48,18 +48,21 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             Log.e(TAG, "Data Payload: " + remoteMessage.getData().get("message"));
 
             try {
-
-
                 if (remoteMessage.getData().toString() != null) {
 
                     // key to parse
 
-                    remoteMessage.getData().containsKey("message");
-                    String subtitle = remoteMessage.getData().get("message");
-                    String title = remoteMessage.getData().get("title");
-                    String body = remoteMessage.getData().get("body");
+                    //{"image":"http:\/\/healthyagingmission.com\/webgurukul\/images\/camera3.png","is_background":true,
+                    // "payload":{"cover":"1","move":"1","camname":"AV81","location":"175, Ramsen Streets, Brooklyn","open":"1"},
+                    // "title":"Camera IOT","message":"Camera AV81, 175, Ramsen Streets, Brooklyn is moved, cover & open",
+                    // "timestamp":"2019-02-25 10:43:46"}
 
-                    handleNotification(subtitle, title, body);
+                    //remoteMessage.getData().containsKey("message");
+                    String subtitle = "abcdfg";/*remoteMessage.getData().get("message");*/
+                    String title = remoteMessage.getData().get("title");
+                   // String body = remoteMessage.getData().get("body");
+
+                    handleNotification(subtitle, title);
 
                 }
 
@@ -69,7 +72,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
     }
 
-    private void handleNotification(String subtitle, String title, String body) {
+    private void handleNotification(String subtitle, String title) {
 
         Intent resultIntent = new Intent(getApplicationContext(), CameraListActivity.class);// here we can navigated activity name
         PendingIntent resultPendingIntent =
@@ -82,14 +85,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
         int defaults = 0;
-        int icon = R.mipmap.camera3;
+        int icon = R.mipmap.camera31;
 
         defaults = defaults | Notification.DEFAULT_LIGHTS;
         defaults = defaults | Notification.DEFAULT_VIBRATE;
         defaults = defaults | Notification.DEFAULT_SOUND;
         final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 getApplicationContext());
-        showSmallNotificationWithImageAsIcon(mBuilder, icon, title, body, System.currentTimeMillis(), resultPendingIntent, defaults);
+        showSmallNotificationWithImageAsIcon(mBuilder, icon, title, subtitle, System.currentTimeMillis(), resultPendingIntent, defaults);
 
     }
 
@@ -104,7 +107,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             NotificationCompat.BigTextStyle inboxStyle = new NotificationCompat.BigTextStyle();
 
             NotificationChannel channel = new NotificationChannel("my_channel_01",
-                    "ColourWithAP",
+                    "CameraIOT",
                     NotificationManager.IMPORTANCE_DEFAULT);
             notificationManager.createNotificationChannel(channel);
 
@@ -140,7 +143,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private int getNotificationIcon() {
         boolean useWhiteIcon = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP);
-        return useWhiteIcon ? R.mipmap.camera3 : R.mipmap.camera3;
+        return useWhiteIcon ? R.mipmap.camera31 : R.mipmap.camera31;
     }
 
     private void handleDataMessage(JSONObject json) {
