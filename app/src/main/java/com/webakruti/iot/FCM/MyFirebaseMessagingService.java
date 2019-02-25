@@ -86,7 +86,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
         int defaults = 0;
-        int icon = R.mipmap.test_small_icon;
+        int icon = R.mipmap.camera2;
 
         defaults = defaults | Notification.DEFAULT_LIGHTS;
         defaults = defaults | Notification.DEFAULT_VIBRATE;
@@ -103,10 +103,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Notification notification;
 
         NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationCompat.BigTextStyle inboxStyle = new NotificationCompat.BigTextStyle();
+        inboxStyle.setBigContentTitle(title);
+        inboxStyle.bigText(message);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationCompat.BigTextStyle inboxStyle = new NotificationCompat.BigTextStyle();
-            inboxStyle.setBigContentTitle(title);
-            inboxStyle.bigText(message);
+
             NotificationChannel channel = new NotificationChannel("my_channel_01",
                     "CameraIOT",
                     NotificationManager.IMPORTANCE_DEFAULT);
@@ -125,9 +127,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     .setChannelId("my_channel_01")
                     .build();
         } else {
-            NotificationCompat.BigTextStyle inboxStyle = new NotificationCompat.BigTextStyle();
-            inboxStyle.setBigContentTitle(title);
-            inboxStyle.bigText(message);
 
             notification = mBuilder.setSmallIcon(icon).setTicker(title).setWhen(0)
                     .setAutoCancel(true)
@@ -148,7 +147,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private int getNotificationIcon() {
         boolean useWhiteIcon = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP);
-        return useWhiteIcon ? R.mipmap.test_small_icon : R.mipmap.camera_small_icon;
+        return useWhiteIcon ? R.mipmap.camera2 : R.mipmap.camera_small_icon;
     }
 
     private void handleDataMessage(JSONObject json) {

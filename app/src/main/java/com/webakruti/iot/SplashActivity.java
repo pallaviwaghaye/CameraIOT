@@ -25,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        //SharedPreferenceManager.setApplicationContext(SplashActivity.this);
+        SharedPreferenceManager.setApplicationContext(SplashActivity.this);
 
         new Handler().postDelayed(new Runnable() {
             /*
@@ -38,18 +38,18 @@ public class SplashActivity extends AppCompatActivity {
                 // Start your app main activity
                 try {
 
-                    /*if (SharedPreferenceManager.getObject() != null) {
+                    if (SharedPreferenceManager.getUserObjectFromSharedPreference() != null) {
                         Intent i = new Intent(SplashActivity.this, CameraListActivity.class);
                         startActivity(i);
                         finish();
-                    } else {*/
+                    } else {
 
                                 Intent i = new Intent(SplashActivity.this, LoginActivity.class);
                                 startActivity(i);
                                 finish();
 
 
-                        //}
+                        }
 
 
                 } catch (Exception e) {
