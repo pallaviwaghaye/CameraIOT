@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
@@ -58,9 +59,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     // "timestamp":"2019-02-25 10:43:46"}
 
                     //remoteMessage.getData().containsKey("message");
-                    String subtitle = "abcdfg";/*remoteMessage.getData().get("message");*/
+                    String subtitle = remoteMessage.getData().get("message");
                     String title = remoteMessage.getData().get("title");
-                   // String body = remoteMessage.getData().get("body");
+                    // String body = remoteMessage.getData().get("body");
 
                     handleNotification(subtitle, title);
 
@@ -85,7 +86,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
         int defaults = 0;
-        int icon = R.mipmap.camera31;
+        int icon = R.mipmap.test_small_icon;
 
         defaults = defaults | Notification.DEFAULT_LIGHTS;
         defaults = defaults | Notification.DEFAULT_VIBRATE;
@@ -96,7 +97,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     }
 
-
     private void showSmallNotificationWithImageAsIcon(NotificationCompat.Builder mBuilder, int icon, String title, String message, long timeStamp, PendingIntent resultPendingIntent, int defaults) {
 
 
@@ -105,7 +105,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationCompat.BigTextStyle inboxStyle = new NotificationCompat.BigTextStyle();
-
+            inboxStyle.setBigContentTitle(title);
+            inboxStyle.bigText(message);
             NotificationChannel channel = new NotificationChannel("my_channel_01",
                     "CameraIOT",
                     NotificationManager.IMPORTANCE_DEFAULT);
@@ -117,23 +118,27 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     .setContentIntent(resultPendingIntent)
                     .setDefaults(defaults)
                     .setStyle(inboxStyle)
-                    .setChannelId("my_channel_01")
                     .setWhen(timeStamp)
                     .setSmallIcon(getNotificationIcon())
                     .setContentText(message)
+                    .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.mipmap.camera3))
+                    .setChannelId("my_channel_01")
                     .build();
         } else {
-            NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+            NotificationCompat.BigTextStyle inboxStyle = new NotificationCompat.BigTextStyle();
+            inboxStyle.setBigContentTitle(title);
+            inboxStyle.bigText(message);
 
             notification = mBuilder.setSmallIcon(icon).setTicker(title).setWhen(0)
                     .setAutoCancel(true)
                     .setContentTitle(title)
+                    .setContentText(message)
                     .setContentIntent(resultPendingIntent)
                     .setDefaults(defaults)
                     .setStyle(inboxStyle)
                     .setWhen(timeStamp)
                     .setSmallIcon(getNotificationIcon())
-                    .setContentText(message)
+                    .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.mipmap.camera3))
                     .build();
         }
         Random random = new Random();
@@ -143,7 +148,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private int getNotificationIcon() {
         boolean useWhiteIcon = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP);
-        return useWhiteIcon ? R.mipmap.camera31 : R.mipmap.camera31;
+        return useWhiteIcon ? R.mipmap.test_small_icon : R.mipmap.camera_small_icon;
     }
 
     private void handleDataMessage(JSONObject json) {
