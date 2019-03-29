@@ -28,18 +28,18 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/icon1" />
+                    android:src="@drawable/white_icon" />
                 <TextView
                     android:id="@+id/toolbarUserDetailsHomeTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="Mock Camera"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textAllCaps="true"
-                    android:layout_marginLeft="55dp"
+                    android:layout_marginLeft="65dp"
                     android:textSize="18dp"
                     android:gravity="left"
                     android:textStyle="bold"/>
@@ -61,7 +61,8 @@
                          <ImageView
                              android:layout_width="20dp"
                              android:layout_height="20dp"
-                             android:src="@drawable/plus" />
+                             android:src="@drawable/plus"
+                             android:visibility="gone"/>
 
                      </LinearLayout>
 
@@ -85,8 +86,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:color="@color/black"
-        android:background="@color/black_green"
+        android:color="@color/white"
+        android:background="@color/white"
         app:headerLayout="@layout/drawer_header"
         app:itemIconTint="@color/nav_drawer_item_select"
         app:itemTextColor="@color/nav_drawer_item_select"

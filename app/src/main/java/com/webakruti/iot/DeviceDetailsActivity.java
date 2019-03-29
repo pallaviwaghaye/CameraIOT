@@ -83,7 +83,7 @@ public class DeviceDetailsActivity extends AppCompatActivity {
 
         if(devicedetails.getCamlogId().equalsIgnoreCase("0")) {
             textViewDeviceStatus.setText("Active");
-            textViewDeviceStatus.setTextColor(getResources().getColor(R.color.green_fluro));
+            textViewDeviceStatus.setTextColor(getResources().getColor(R.color.green));
             linearLayoutActivity.setVisibility(View.INVISIBLE);
             textViewNoData.setVisibility(View.VISIBLE);
         }else{
@@ -111,33 +111,33 @@ public class DeviceDetailsActivity extends AppCompatActivity {
                 textViewMoved.setText("Device Move Detected");
                 //viewHolder.textViewMoved.setBackgroundColor(R.color.red);
                 //textViewMoved.setBackgroundColor(getResources().getColor(R.color.red));
-                textViewMoved.setTextColor(getResources().getColor(R.color.yellow));
+                textViewMoved.setTextColor(getResources().getColor(R.color.red));
             }
             if(devicedetails.getCamIr() != null) {
                 textViewCovered.setText("Device Cover Detected");
                 //viewHolder.textViewCovered.setBackgroundColor(R.color.red);
                 //textViewCovered.setBackgroundColor(getResources().getColor(R.color.red));
-                textViewCovered.setTextColor(getResources().getColor(R.color.yellow));
+                textViewCovered.setTextColor(getResources().getColor(R.color.red));
             }
             if(devicedetails.getCamOpen() != null) {
                 textViewOpened.setText("Device Open Detected");
                 //viewHolder.textViewOpened.setBackgroundColor(R.color.red);
                // textViewOpened.setBackgroundColor(getResources().getColor(R.color.red));
-                textViewOpened.setTextColor(getResources().getColor(R.color.yellow));
+                textViewOpened.setTextColor(getResources().getColor(R.color.red));
             }
         }else if(devicedetails.getCamMove().equalsIgnoreCase("1") && devicedetails.getCamIr().equalsIgnoreCase("1")){
             if(devicedetails.getCamMove().equalsIgnoreCase("1")) {
                 textViewMoved.setText("Device Move Detected");
                 //viewHolder.textViewMoved.setBackgroundColor(R.color.red);
                //textViewMoved.setBackgroundColor(getResources().getColor(R.color.red));
-                textViewMoved.setTextColor(getResources().getColor(R.color.yellow));
+                textViewMoved.setTextColor(getResources().getColor(R.color.red));
 
             }
             if(devicedetails.getCamIr().equalsIgnoreCase("1")) {
                 textViewCovered.setText("Device Cover Detected");
                 //viewHolder.textViewCovered.setBackgroundColor(R.color.red);
                 //textViewCovered.setBackgroundColor(getResources().getColor(R.color.red));
-                textViewCovered.setTextColor(getResources().getColor(R.color.yellow));
+                textViewCovered.setTextColor(getResources().getColor(R.color.red));
             }
             if(devicedetails.getCamOpen().equalsIgnoreCase("0")) {
                textViewOpened.setText("Device Open Detected");
@@ -152,14 +152,14 @@ public class DeviceDetailsActivity extends AppCompatActivity {
                 textViewMoved.setText("Device Move Detected");
                 //viewHolder.textViewMoved.setBackgroundColor(R.color.red);
                 //textViewMoved.setBackgroundColor(getResources().getColor(R.color.red));
-                textViewMoved.setTextColor(getResources().getColor(R.color.yellow));
+                textViewMoved.setTextColor(getResources().getColor(R.color.red));
 
             }
             if(devicedetails.getCamOpen().equalsIgnoreCase("1")) {
                 textViewOpened.setText("Device Open Detected");
                 //viewHolder.textViewOpened.setBackgroundColor(R.color.red);
                //textViewOpened.setBackgroundColor(getResources().getColor(R.color.red));
-                textViewOpened.setTextColor(getResources().getColor(R.color.yellow));
+                textViewOpened.setTextColor(getResources().getColor(R.color.red));
             }
             if(devicedetails.getCamIr().equalsIgnoreCase("0")) {
                 textViewCovered.setText("Device Cover Detected");
@@ -174,13 +174,13 @@ public class DeviceDetailsActivity extends AppCompatActivity {
                 textViewCovered.setText("Device Cover Detected");
                 //viewHolder.textViewCovered.setBackgroundColor(R.color.red);
                 //textViewCovered.setBackgroundColor(getResources().getColor(R.color.red));
-                textViewCovered.setTextColor(getResources().getColor(R.color.yellow));
+                textViewCovered.setTextColor(getResources().getColor(R.color.red));
             }
             if(devicedetails.getCamOpen().equalsIgnoreCase("1")) {
                 textViewOpened.setText("Device Open Detected");
                 //viewHolder.textViewOpened.setBackgroundColor(R.color.red);
                 //textViewOpened.setBackgroundColor(getResources().getColor(R.color.red));
-                textViewOpened.setTextColor(getResources().getColor(R.color.yellow));
+                textViewOpened.setTextColor(getResources().getColor(R.color.red));
             }
             if(devicedetails.getCamMove().equalsIgnoreCase("0")) {
                 textViewMoved.setText("Device Move Detected");
@@ -221,7 +221,7 @@ public class DeviceDetailsActivity extends AppCompatActivity {
             if(devicedetails.getCamOpen().equalsIgnoreCase("1")) {
                 textViewOpened.setText("Device Open Detected");
                 //textViewOpened.setBackgroundColor(getResources().getColor(R.color.red));
-                textViewOpened.setTextColor(getResources().getColor(R.color.yellow));
+                textViewOpened.setTextColor(getResources().getColor(R.color.red));
             }
 
         }
@@ -240,7 +240,7 @@ public class DeviceDetailsActivity extends AppCompatActivity {
             if(devicedetails.getCamIr().equalsIgnoreCase("1")) {
                 textViewCovered.setText("Device Cover Detected");
                 //textViewCovered.setBackgroundColor(getResources().getColor(R.color.red));
-                textViewCovered.setTextColor(getResources().getColor(R.color.yellow));
+                textViewCovered.setTextColor(getResources().getColor(R.color.red));
             }
         }
         else if(devicedetails.getCamIr().equalsIgnoreCase("0") && devicedetails.getCamOpen().equalsIgnoreCase("0"))
@@ -258,7 +258,7 @@ public class DeviceDetailsActivity extends AppCompatActivity {
             if(devicedetails.getCamMove().equalsIgnoreCase("1")) {
                 textViewMoved.setText("Device Move Detected");
                 //textViewMoved.setBackgroundColor(getResources().getColor(R.color.red));
-                textViewMoved.setTextColor(getResources().getColor(R.color.yellow));
+                textViewMoved.setTextColor(getResources().getColor(R.color.red));
 
             }
         }else{
@@ -266,19 +266,19 @@ public class DeviceDetailsActivity extends AppCompatActivity {
                 textViewMoved.setText("Device Move Detected");
                 //viewHolder.textViewMoved.setBackgroundColor(R.color.green);
                 //textViewMoved.setBackgroundColor(getResources().getColor(R.color.red));
-                textViewMoved.setTextColor(getResources().getColor(R.color.yellow));
+                textViewMoved.setTextColor(getResources().getColor(R.color.red));
 
             }
             if(devicedetails.getCamIr() != null) {
                 textViewCovered.setText("Device Cover Detected");
                 //textViewCovered.setBackgroundColor(getResources().getColor(R.color.red));
-                textViewCovered.setTextColor(getResources().getColor(R.color.yellow));
+                textViewCovered.setTextColor(getResources().getColor(R.color.red));
 
             }
             if(devicedetails.getCamOpen() != null) {
                 textViewOpened.setText("Device Open Detected");
                 //textViewOpened.setBackgroundColor(getResources().getColor(R.color.red));
-                textViewOpened.setTextColor(getResources().getColor(R.color.yellow));
+                textViewOpened.setTextColor(getResources().getColor(R.color.red));
             }
         }
 

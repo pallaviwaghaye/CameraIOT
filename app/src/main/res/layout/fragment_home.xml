@@ -6,7 +6,7 @@
     android:id="@+id/linearLayoutMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_green"
+    android:background="@color/white"
     >
 
 
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:text="All Devices"
             android:textAllCaps="true"
-            android:textColor="@color/white"
+            android:textColor="@color/gray4"
             android:textStyle="bold"
             android:textSize="15dp"
             android:layout_marginLeft="20dp"
@@ -92,7 +92,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
-        android:src="@drawable/ic_plus"
+        android:src="@drawable/ic_white_plus"
         android:elevation="6dp"
         />
 
