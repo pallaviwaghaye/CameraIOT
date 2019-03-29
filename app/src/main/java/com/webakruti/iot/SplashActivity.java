@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.webakruti.iot.utils.SharedPreferenceManager;
+
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -39,7 +41,7 @@ public class SplashActivity extends AppCompatActivity {
                 try {
 
                     if (SharedPreferenceManager.getUserObjectFromSharedPreference() != null) {
-                        Intent i = new Intent(SplashActivity.this, CameraListActivity.class);
+                        Intent i = new Intent(SplashActivity.this, HomeActivity.class);
                         startActivity(i);
                         finish();
                     } else {

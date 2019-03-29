@@ -10,7 +10,6 @@ import android.content.SharedPreferences;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,8 +18,10 @@ import android.widget.Toast;
 
 import com.webakruti.iot.FCM.Config;
 import com.webakruti.iot.FCM.NotificationUtils;
+import com.webakruti.iot.Model.LoginModel;
 import com.webakruti.iot.retrofit.ApiConstants;
 import com.webakruti.iot.retrofit.service.RestClient;
+import com.webakruti.iot.utils.SharedPreferenceManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,6 +35,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button buttonLogin;
     private EditText editTextEmail;
     private EditText editTextPassword;
+    private Button buttonGoToSignup;
     private ProgressDialog progressDialogForAPI;
 
     @Override
@@ -47,6 +49,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
         buttonLogin.setOnClickListener(this);
+
+        buttonGoToSignup = (Button) findViewById(R.id.buttonGoToSignup);
+        buttonGoToSignup.setOnClickListener(this);
 
 
     mRegistrationBroadcastReceiver =new
@@ -141,16 +146,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
 
                     break;
+
+                case R.id.buttonGoToSignup :
+                    Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
+                    startActivity(intent);
+                    finish();
+                    break;
                 }
     }
 
-        public boolean isValidEmailAddress(String email) {
+
+    public boolean isValidEmailAddress(String email) {
             String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
             java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
             java.util.regex.Matcher m = p.matcher(email);
             return m.matches();
         }
 
+    //using params-------------------------------
     private void callLoginAPI() {
 
         progressDialogForAPI = new ProgressDialog(this);
@@ -171,13 +184,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     LoginModel result = response.body();
 
+                    // Save UserResponse to SharedPref
+                    SharedPreferenceManager.storeUserResponseObjectInSharedPreference(result);
 
-                        // Save UserResponse to SharedPref
-                        SharedPreferenceManager.storeUserResponseObjectInSharedPreference(result);
-                        Toast.makeText(LoginActivity.this, result.getMsg().toString(), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, CameraListActivity.class);
-                        startActivity(intent);
-                        finish();
+                    if(result.getStatus() == true) {
+                       // Toast.makeText(LoginActivity.this, result.getMsg().toString(), Toast.LENGTH_SHORT).show();
+                       /* new AlertDialog.Builder(LoginActivity.this,R.style.alertDialog)
+                                .setMessage(result.getMsg().toString())
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+*/
+                                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                   /* }
+                                })
+                                .show();*/
+                    }
+                    else{
+                        //Toast.makeText(LoginActivity.this, result.getMsg().toString(), Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(LoginActivity.this,R.style.alertDialog)
+                                .setMessage(result.getMsg().toString())
+                                .setPositiveButton("Ok", null)
+                                .show();
+                    }
 
 
                 } else {
@@ -185,7 +216,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     //  Toast.makeText(UserLoginActivity.this, "Unauthorized User!! MobileNo or Password is incorrect.", Toast.LENGTH_SHORT).show();
 
                     new AlertDialog.Builder(LoginActivity.this)
-                            .setMessage("Unauthorized User!! MobileNo or Password is incorrect.")
+                            .setMessage("Unauthorized User!!")
                             .setPositiveButton("OK", null)
                             .show();
                     /*Toast toast = Toast.makeText(UserLoginActivity.this, "Unauthorized User!! MobileNo or Password is incorrect.", Toast.LENGTH_LONG);
@@ -215,4 +246,84 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
     }
+
+
+    //using multipart formdata-------------------------
+    /*private void callLoginAPI() {
+
+        progressDialogForAPI = new ProgressDialog(LoginActivity.this);
+        progressDialogForAPI.setCancelable(false);
+        progressDialogForAPI.setIndeterminate(true);
+        progressDialogForAPI.setMessage("Please wait...");
+        progressDialogForAPI.show();
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
+        Log.e("Generated Token:", pref.getString("regId", ""));
+        String firebaseToken = pref.getString("regId","");
+
+        RequestBody email = RequestBody.create(MediaType.parse("multipart/form-data"), editTextEmail.getText().toString());
+        RequestBody password = RequestBody.create(MediaType.parse("multipart/form-data"), editTextPassword.getText().toString());
+        RequestBody registerid = RequestBody.create(MediaType.parse("multipart/form-data"), firebaseToken);
+
+
+        Call<login> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).login(email,password,registerid);
+        requestCallback.enqueue(new Callback<login>() {
+            @Override
+            public void onResponse(Call<login> call, Response<login> response) {
+                if (response.isSuccessful() && response.body() != null && response.code() == 200) {
+
+                    login result = response.body();
+
+                    Log.e("result :==", String.valueOf(result));
+
+                    // Save UserResponse to SharedPref
+                    SharedPreferenceManager.storeUserResponseObjectInSharedPreference(result);
+
+                    if(result.getStatus() == true) {
+                        Toast.makeText(LoginActivity.this, result.getMsg().toString(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginActivity.this, CameraListActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    else{
+                        Toast.makeText(LoginActivity.this, result.getMsg().toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+                    // Response code is 401
+                    //  Toast.makeText(UserLoginActivity.this, "Unauthorized User!! MobileNo or Password is incorrect.", Toast.LENGTH_SHORT).show();
+
+                    new AlertDialog.Builder(LoginActivity.this)
+                            .setMessage("Unauthorized User!!")
+                            .setPositiveButton("OK", null)
+                            .show();
+                    *//*Toast toast = Toast.makeText(UserLoginActivity.this, "Unauthorized User!! MobileNo or Password is incorrect.", Toast.LENGTH_LONG);
+                    View view = toast.getView();
+                    TextView text = (TextView) view.findViewById(android.R.id.message);
+                    text.setTextColor(Color.YELLOW);
+                    toast.show();*//*
+                }
+
+                if (progressDialogForAPI != null) {
+                    progressDialogForAPI.cancel();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<login> call, Throwable t) {
+
+                if (t != null) {
+
+                    if (progressDialogForAPI != null) {
+                        progressDialogForAPI.cancel();
+                    }
+                    if (t.getMessage() != null)
+                        Log.e("error", t.getMessage());
+                }
+
+            }
+        });
+
+
+    }*/
 }

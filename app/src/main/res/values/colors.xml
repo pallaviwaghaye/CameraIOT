@@ -29,7 +29,8 @@
     <color name="mid_gray">#ccc9c9</color>
     <color name="dark_gray">#b4b3b3</color>
     <color name="green">#28a745</color>
-    <color name="green_fluroscent">#35e75d</color>
+    <color name="green_fluro">#20ff00</color>
+    <color name="black_green">#1c2718</color>
     <color name="green_faint">#9df5b1</color>
     <color name="dark_green">#0e8429</color>
     <color name="offwhite">#f5f5f5</color>

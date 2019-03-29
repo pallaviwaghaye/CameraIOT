@@ -2,31 +2,22 @@ package com.webakruti.iot;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.webakruti.iot.FCM.Config;
-import com.webakruti.iot.FCM.NotificationUtils;
+import com.webakruti.iot.Model.CameraModel;
 import com.webakruti.iot.adapter.CamCategoryAdapter;
 import com.webakruti.iot.retrofit.ApiConstants;
 import com.webakruti.iot.retrofit.service.RestClient;
+import com.webakruti.iot.utils.SharedPreferenceManager;
 
 import java.util.List;
 

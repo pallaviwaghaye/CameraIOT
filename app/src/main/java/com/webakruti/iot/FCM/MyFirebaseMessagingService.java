@@ -123,7 +123,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     .setWhen(timeStamp)
                     .setSmallIcon(getNotificationIcon())
                     .setContentText(message)
-                    .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.mipmap.camera3))
+                    .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.mipmap.app_icon))
                     .setChannelId("my_channel_01")
                     .build();
         } else {
@@ -137,7 +137,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     .setStyle(inboxStyle)
                     .setWhen(timeStamp)
                     .setSmallIcon(getNotificationIcon())
-                    .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.mipmap.camera3))
+                    .setLargeIcon(BitmapFactory.decodeResource(getApplicationContext().getResources(), R.mipmap.app_icon))
                     .build();
         }
         Random random = new Random();
@@ -147,7 +147,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private int getNotificationIcon() {
         boolean useWhiteIcon = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP);
-        return useWhiteIcon ? R.mipmap.camera2 : R.mipmap.camera_small_icon;
+        return useWhiteIcon ? R.mipmap.camera2 : R.mipmap.small_app_icon;
     }
 
     private void handleDataMessage(JSONObject json) {

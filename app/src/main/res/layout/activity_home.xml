@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/green_fluro"
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon1" />
+                <TextView
+                    android:id="@+id/toolbarUserDetailsHomeTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Mock Camera"
+                    android:textColor="@color/black"
+                    android:textAllCaps="true"
+                    android:layout_marginLeft="55dp"
+                    android:textSize="18dp"
+                    android:gravity="left"
+                    android:textStyle="bold"/>
+
+                 <LinearLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentRight="true"
+                     android:orientation="horizontal">
+
+                     <LinearLayout
+                         android:id="@+id/linearLayoutAddDevice"
+                         android:layout_width="wrap_content"
+                         android:layout_height="?attr/actionBarSize"
+                         android:layout_marginRight="15.667dp"
+                         android:gravity="center"
+                         android:orientation="vertical">
+
+                         <ImageView
+                             android:layout_width="20dp"
+                             android:layout_height="20dp"
+                             android:src="@drawable/plus" />
+
+                     </LinearLayout>
+
+                 </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.Toolbar>
+
+        <FrameLayout
+            android:id="@+id/home_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"></FrameLayout>
+    </RelativeLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:color="@color/black"
+        android:background="@color/black_green"
+        app:headerLayout="@layout/drawer_header"
+        app:itemIconTint="@color/nav_drawer_item_select"
+        app:itemTextColor="@color/nav_drawer_item_select"
+        app:menu="@menu/navigation_options" />
+</android.support.v4.widget.DrawerLayout>
+
+

@@ -54,7 +54,7 @@ public class NotificationUtils {
 
 
         // notification icon
-        final int icon = R.mipmap.camera3;
+        final int icon = R.mipmap.app_icon;
 
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         final PendingIntent resultPendingIntent =
@@ -113,7 +113,7 @@ public class NotificationUtils {
                     .setStyle(inboxStyle)
                     .setChannelId("my_channel_01")
                     .setWhen(getTimeMilliSec(timeStamp))
-                    .setSmallIcon(R.mipmap.camera3)
+                    .setSmallIcon(R.mipmap.app_icon)
                     .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), icon))
                     .setContentText(message)
                     .build();
@@ -125,7 +125,7 @@ public class NotificationUtils {
                     .setSound(alarmSound)
                     .setStyle(inboxStyle)
                     .setWhen(getTimeMilliSec(timeStamp))
-                    .setSmallIcon(R.mipmap.camera3)
+                    .setSmallIcon(R.mipmap.app_icon)
                     .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), icon))
                     .setContentText(message)
                     .build();
@@ -147,7 +147,7 @@ public class NotificationUtils {
                 .setSound(alarmSound)
                 .setStyle(bigPictureStyle)
                 .setWhen(getTimeMilliSec(timeStamp))
-                .setSmallIcon(R.mipmap.camera3)
+                .setSmallIcon(R.mipmap.app_icon)
                 .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), icon))
                 .setContentText(message)
                 .build();

@@ -1,4 +1,4 @@
-package com.webakruti.iot;
+package com.webakruti.iot.Model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
