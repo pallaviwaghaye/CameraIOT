@@ -86,7 +86,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
         int defaults = 0;
-        int icon = R.mipmap.camera2;
+        //int icon = R.mipmap.camera2;
+        int icon = R.mipmap.app_icon;
 
         defaults = defaults | Notification.DEFAULT_LIGHTS;
         defaults = defaults | Notification.DEFAULT_VIBRATE;
@@ -147,7 +148,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private int getNotificationIcon() {
         boolean useWhiteIcon = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP);
-        return useWhiteIcon ? R.mipmap.camera2 : R.mipmap.small_app_icon;
+        //return useWhiteIcon ? R.mipmap.camera2 : R.mipmap.small_app_icon;
+        return useWhiteIcon ? R.mipmap.app_icon : R.mipmap.small_app_icon;
     }
 
     private void handleDataMessage(JSONObject json) {
