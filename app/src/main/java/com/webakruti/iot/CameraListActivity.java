@@ -12,11 +12,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.webakruti.iot.Model.CameraModel;
 import com.webakruti.iot.adapter.CamCategoryAdapter;
 import com.webakruti.iot.retrofit.ApiConstants;
 import com.webakruti.iot.retrofit.service.RestClient;
+import com.webakruti.iot.utils.NetworkUtil;
 import com.webakruti.iot.utils.SharedPreferenceManager;
 
 import java.util.List;
@@ -77,7 +79,13 @@ public class CameraListActivity extends AppCompatActivity {
             }
         });
 
-        getRetrofit();
+        if (NetworkUtil.hasConnectivity(CameraListActivity.this)) {
+            getRetrofit();
+
+        } else {
+            Toast.makeText(CameraListActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+        }
+
 
 
 

@@ -16,6 +16,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        disable 'MissingTranslation'
+        checkReleaseBuilds false
+    }
 }
 
 dependencies {
@@ -49,14 +54,5 @@ dependencies {
     // retrofit
 
 }
-
-
-
-
-
-
-
-
-
 
 apply plugin: 'com.google.gms.google-services'

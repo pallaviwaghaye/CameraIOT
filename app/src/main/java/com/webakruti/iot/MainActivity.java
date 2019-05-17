@@ -13,7 +13,6 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.webakruti.iot.FCM.Config;
 import com.webakruti.iot.FCM.NotificationUtils;
 

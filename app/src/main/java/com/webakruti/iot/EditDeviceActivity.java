@@ -16,11 +16,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.webakruti.iot.Model.addDevice;
 import com.webakruti.iot.Model.cameraList;
 import com.webakruti.iot.Model.editDevice;
 import com.webakruti.iot.retrofit.ApiConstants;
 import com.webakruti.iot.retrofit.service.RestClient;
+import com.webakruti.iot.utils.NetworkUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -101,7 +101,13 @@ public class EditDeviceActivity extends AppCompatActivity implements View.OnClic
             case R.id.relativeLayoutUpdate :
                 if (editTextDeviceid.getText().toString().length() > 0) {
 
-                    callUpdateDeviceAPI();
+
+                    if (NetworkUtil.hasConnectivity(EditDeviceActivity.this)) {
+                        callUpdateDeviceAPI();
+
+                    } else {
+                        Toast.makeText(EditDeviceActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                    }
                                 /*Intent intent = new Intent(LoginActivity.this, CameraListActivity.class);
                                 startActivity(intent);
                                 finish();*/

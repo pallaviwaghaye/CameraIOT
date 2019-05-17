@@ -4,24 +4,19 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.webakruti.iot.FCM.Config;
-import com.webakruti.iot.Model.login;
 import com.webakruti.iot.Model.register;
 import com.webakruti.iot.retrofit.ApiConstants;
 import com.webakruti.iot.retrofit.service.RestClient;
+import com.webakruti.iot.utils.NetworkUtil;
 
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -64,7 +59,13 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                                 if (editTextConfirmPassword.getText().toString().length() >= 6) {
                                     if(editTextConfirmPassword.getText().toString().equalsIgnoreCase(editTextPassword.getText().toString())){
 
+
+                                        if (NetworkUtil.hasConnectivity(RegistrationActivity.this)) {
                                             callRegistrationAPI();
+
+                                        } else {
+                                            Toast.makeText(RegistrationActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                        }
                                             /*Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
                                             startActivity(intent);
                                             finish();*/

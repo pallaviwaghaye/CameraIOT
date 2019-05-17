@@ -21,6 +21,7 @@ import com.webakruti.iot.FCM.NotificationUtils;
 import com.webakruti.iot.Model.LoginModel;
 import com.webakruti.iot.retrofit.ApiConstants;
 import com.webakruti.iot.retrofit.service.RestClient;
+import com.webakruti.iot.utils.NetworkUtil;
 import com.webakruti.iot.utils.SharedPreferenceManager;
 
 import retrofit2.Call;
@@ -130,7 +131,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 //Object login = new Object[]{editTextEmail.getText().toString(), editTextPassword.getText().toString()};
                                 //SharedPreferenceManager.storeObject((com.webakruti.iot.login) login);
 
-                            callLoginAPI();
+                            if (NetworkUtil.hasConnectivity(LoginActivity.this)) {
+                                callLoginAPI();
+
+                            } else {
+                                Toast.makeText(LoginActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                            }
                                 /*Intent intent = new Intent(LoginActivity.this, CameraListActivity.class);
                                 startActivity(intent);
                                 finish();*/

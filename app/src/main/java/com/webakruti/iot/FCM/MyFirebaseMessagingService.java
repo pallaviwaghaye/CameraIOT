@@ -15,7 +15,6 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.webakruti.iot.CameraListActivity;
 import com.webakruti.iot.HomeActivity;
 import com.webakruti.iot.MainActivity;
 import com.webakruti.iot.R;

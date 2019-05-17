@@ -6,11 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -24,14 +24,13 @@ import android.widget.Toast;
 import com.webakruti.iot.AddDeviceActivity;
 import com.webakruti.iot.FCM.Config;
 import com.webakruti.iot.FCM.NotificationUtils;
-import com.webakruti.iot.HomeActivity;
 import com.webakruti.iot.MainActivity;
 import com.webakruti.iot.Model.cameraList;
 import com.webakruti.iot.R;
-import com.webakruti.iot.adapter.CamCategoryAdapter;
 import com.webakruti.iot.adapter.HomeAdapter;
 import com.webakruti.iot.retrofit.ApiConstants;
 import com.webakruti.iot.retrofit.service.RestClient;
+import com.webakruti.iot.utils.NetworkUtil;
 
 import java.util.List;
 
@@ -51,6 +50,10 @@ public class HomeFragment extends Fragment {
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     private TextView txtRegId, txtMessage;
 
+    private com.webakruti.iot.utils.CustomSwipeToRefresh swipeContainer;
+    boolean isCallFromPullDown = false;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,8 +62,6 @@ public class HomeFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         initViews();
-
-
 
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -88,7 +89,21 @@ public class HomeFragment extends Fragment {
 
         displayFirebaseRegId();
 
-        getRetrofit();
+        initSwipeLayout();
+
+        progressDialogForAPI = new ProgressDialog(getActivity());
+        progressDialogForAPI.setCancelable(false);
+        progressDialogForAPI.setIndeterminate(true);
+        progressDialogForAPI.setMessage("Please wait...");
+        progressDialogForAPI.show();
+
+        if (NetworkUtil.hasConnectivity(getActivity())) {
+            getRetrofit();
+        } else {
+            Toast.makeText(getActivity(), R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+        }
+
+
         return rootView;
     }
 
@@ -130,6 +145,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void initViews() {
+        swipeContainer = (com.webakruti.iot.utils.CustomSwipeToRefresh) rootView.findViewById(R.id.swipeContainer);
+
         txtRegId = (TextView) rootView.findViewById(R.id.txt_reg_id);
         txtMessage = (TextView) rootView.findViewById(R.id.txt_push_message);
 
@@ -152,13 +169,32 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void getRetrofit() {
+    private void initSwipeLayout() {
 
-        progressDialogForAPI = new ProgressDialog(getActivity());
-        progressDialogForAPI.setCancelable(false);
-        progressDialogForAPI.setIndeterminate(true);
-        progressDialogForAPI.setMessage("Please wait...");
-        progressDialogForAPI.show();
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.e("", "swipe to refresh");
+                if (NetworkUtil.hasConnectivity(getActivity())) {
+                    // call API
+                    isCallFromPullDown = true;
+                    getRetrofit();
+
+                } else {
+                    swipeContainer.setRefreshing(false);
+                }
+            }
+        });
+// Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(R.color.blue,
+                R.color.red,
+                R.color.blue,
+                R.color.red);
+
+    }
+
+    private void getRetrofit() {
 
 
         Call<cameraList> requestCallback = RestClient.getApiService(ApiConstants.BASE_URL).getAllCameras();
@@ -189,8 +225,13 @@ public class HomeFragment extends Fragment {
                     // Response code is 401
                 }
 
-                if (progressDialogForAPI != null) {
-                    progressDialogForAPI.cancel();
+                if (isCallFromPullDown) {
+                    swipeContainer.setRefreshing(false);
+                    isCallFromPullDown = false;
+                } else {
+                    if (progressDialogForAPI != null) {
+                        progressDialogForAPI.cancel();
+                    }
                 }
             }
 
@@ -199,8 +240,13 @@ public class HomeFragment extends Fragment {
 
                 if (t != null) {
 
-                    if (progressDialogForAPI != null) {
-                        progressDialogForAPI.cancel();
+                    if (isCallFromPullDown) {
+                        swipeContainer.setRefreshing(false);
+                        isCallFromPullDown = false;
+                    } else {
+                        if (progressDialogForAPI != null) {
+                            progressDialogForAPI.cancel();
+                        }
                     }
                     if (t.getMessage() != null)
                         Log.e("error", t.getMessage());

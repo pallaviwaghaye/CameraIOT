@@ -14,19 +14,16 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webakruti.iot.Model.addDevice;
-import com.webakruti.iot.Model.register;
 import com.webakruti.iot.retrofit.ApiConstants;
 import com.webakruti.iot.retrofit.service.RestClient;
+import com.webakruti.iot.utils.NetworkUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -90,8 +87,13 @@ public class AddDeviceActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.relativeLayoutAdd :
                 if (editTextDeviceid.getText().toString().length() > 0) {
+                    if (NetworkUtil.hasConnectivity(AddDeviceActivity.this)) {
+                        callAddDeviceAPI();
 
-                            callAddDeviceAPI();
+                    } else {
+                        Toast.makeText(AddDeviceActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                    }
+
                                 /*Intent intent = new Intent(LoginActivity.this, CameraListActivity.class);
                                 startActivity(intent);
                                 finish();*/

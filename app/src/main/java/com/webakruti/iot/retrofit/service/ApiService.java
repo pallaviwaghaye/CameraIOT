@@ -6,18 +6,14 @@ import com.webakruti.iot.Model.addDevice;
 import com.webakruti.iot.Model.cameraList;
 import com.webakruti.iot.Model.deleteDevice;
 import com.webakruti.iot.Model.editDevice;
-import com.webakruti.iot.Model.login;
 import com.webakruti.iot.Model.register;
 import com.webakruti.iot.retrofit.ApiConstants;
 
 import java.util.List;
 
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface ApiService {

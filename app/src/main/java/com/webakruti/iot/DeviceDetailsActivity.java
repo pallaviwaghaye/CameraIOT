@@ -14,11 +14,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.webakruti.iot.Model.cameraList;
 import com.webakruti.iot.Model.deleteDevice;
 import com.webakruti.iot.retrofit.ApiConstants;
 import com.webakruti.iot.retrofit.service.RestClient;
+import com.webakruti.iot.utils.NetworkUtil;
 
 import java.io.Serializable;
 
@@ -81,7 +83,10 @@ public class DeviceDetailsActivity extends AppCompatActivity {
         textViewTime.setText(devicedetails.getTime());
 
 
-        if(devicedetails.getCamlogId().equalsIgnoreCase("0")) {
+        if(devicedetails.getCamlogId().equalsIgnoreCase("0")||
+                (devicedetails.getCamMove().equalsIgnoreCase("0") &&
+                        devicedetails.getCamIr().equalsIgnoreCase("0") &&
+                        devicedetails.getCamOpen().equalsIgnoreCase("0"))) {
             textViewDeviceStatus.setText("Active");
             textViewDeviceStatus.setTextColor(getResources().getColor(R.color.green));
             linearLayoutActivity.setVisibility(View.INVISIBLE);
@@ -309,7 +314,14 @@ public class DeviceDetailsActivity extends AppCompatActivity {
                                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int whichButton) {
                                                 //delete device
-                                                deleteFromServer();
+
+                                                if (NetworkUtil.hasConnectivity(DeviceDetailsActivity.this)) {
+                                                    deleteFromServerAPI();
+
+                                                } else {
+                                                    Toast.makeText(DeviceDetailsActivity.this, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
+                                                }
+
                                                 //notifyDataSetChanged();
 
                                             }
@@ -343,7 +355,7 @@ public class DeviceDetailsActivity extends AppCompatActivity {
         });
     }
 
-    private void deleteFromServer() {
+    private void deleteFromServerAPI() {
 
         progressDialogForAPI = new ProgressDialog(DeviceDetailsActivity.this);
         progressDialogForAPI.setCancelable(false);
